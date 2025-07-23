@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>回家倒计时</title>
+  <style>
+    body {
+      background-color: #fff9f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .title {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 40px;
+    }
+    .countdown {
+      font-size: 48px;
+      color: #d35400;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title">🏠 距离回家还有：</div>
+  <div class="countdown" id="countdown">加载中...</div>
+
+  <script>
+    const countdownElement = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const targetDate = new Date("2026-02-09T00:00:00");
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownElement.innerText = "你已经到家啦！🎉";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownElement.innerText = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>
